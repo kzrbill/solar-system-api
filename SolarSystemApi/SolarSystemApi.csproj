@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <Folder Include="Controllers\Responses\" />
+    <Folder Include="Controllers\Actions\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
@@ -18,4 +18,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SolarSystemApi.Services\SolarSystemApi.Services.csproj" />
+    <ProjectReference Include="..\SolarSystemApi.Models\SolarSystemApi.Models.csproj" />
+  </ItemGroup>
 </Project>

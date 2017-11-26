@@ -4,26 +4,24 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SolarSystemApi.Models;
+using SolarSystemApi.Services;
 
 namespace SolarSystemApi.Controllers
 {
-    public class Planet : IPlanet
-    {
-        private readonly string _planetName;
-        public Planet(string planetName) {
-            _planetName = planetName;
-        }
-
-        public string Name => _planetName;
-    }
-
-    public interface IPlanet  {
-        string Name { get; }
-    }
-
     [Route("api/[controller]")]
     public class PlanetsController : Controller
     {
+        private readonly IPlanetRepository _planetRepo;
+        public PlanetsController(IPlanetRepository planetRepo)
+        {
+            _planetRepo = planetRepo;
+        }
+
+        //public PlanetsController()
+        //{
+        //}
+
         // GET api/planets
         [HttpGet]
         public IEnumerable<IPlanet> Get()
@@ -35,13 +33,7 @@ namespace SolarSystemApi.Controllers
         [HttpGet("{planetName}")]
         public IActionResult Get(string planetName)
         {
-            var planets = new Dictionary<string, IPlanet>()
-            {
-                {"earth", new Planet("Earth")}
-            };
-
-            planetName = planetName.ToLower();
-            var planet = planets.GetValueOrDefault(planetName);
+            IPlanet planet = _planetRepo.GetByName(planetName);
             if (null != planet) {
                 return Ok(planet);
             }
@@ -49,4 +41,6 @@ namespace SolarSystemApi.Controllers
             return NotFound(planetName);
         }
     }
+
+   
 }

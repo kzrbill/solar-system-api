@@ -15,5 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SolarSystemApi\SolarSystemApi.csproj" />
+    <ProjectReference Include="..\SolarSystemApi.Services\SolarSystemApi.Services.csproj" />
   </ItemGroup>
 </Project>

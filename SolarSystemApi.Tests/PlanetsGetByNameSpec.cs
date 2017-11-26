@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using SolarSystemApi.Controllers;
+using SolarSystemApi.Services;
 
 namespace SolarSystemApi.Tests
 {
@@ -10,7 +11,7 @@ namespace SolarSystemApi.Tests
         private static IActionResult _result;
 
         private static void GetPlanet(string planetName) {
-            var planetsController = new PlanetsController();
+            var planetsController = new PlanetsController(new PlanetRepository());
             _result = planetsController.Get(planetName);
         }
 
@@ -20,7 +21,7 @@ namespace SolarSystemApi.Tests
             [TestInitialize]
             public void BeforEach()
             {
-                GetPlanet("SomeMysteriousAnomaly.198.45.222");
+                GetPlanet("SomeElusiveAnomaly");
             }
 
             [TestMethod]

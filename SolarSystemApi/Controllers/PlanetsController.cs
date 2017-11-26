@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SolarSystemApi.Controllers
 {
-    public class Planet : ISolarAnomaly
+    public class Planet : IPlanet
     {
         private readonly string _planetName;
         public Planet(string planetName) {
@@ -17,7 +17,7 @@ namespace SolarSystemApi.Controllers
         public string Name => _planetName;
     }
 
-    public interface ISolarAnomaly  {
+    public interface IPlanet  {
         string Name { get; }
     }
 
@@ -26,20 +26,21 @@ namespace SolarSystemApi.Controllers
     {
         // GET api/planets
         [HttpGet]
-        public IEnumerable<ISolarAnomaly> Get()
+        public IEnumerable<IPlanet> Get()
         {
-            return new ISolarAnomaly[] { new Planet("somePlanet") };
+            return new IPlanet[] { new Planet("somePlanet") };
         }
 
         // GET api/planets/earth
         [HttpGet("{planetName}")]
         public IActionResult Get(string planetName)
         {
-            var planets = new Dictionary<string, ISolarAnomaly>()
+            var planets = new Dictionary<string, IPlanet>()
             {
-                {"Earth", new Planet("Earth")}
+                {"earth", new Planet("Earth")}
             };
 
+            planetName = planetName.ToLower();
             var planet = planets.GetValueOrDefault(planetName);
             if (null != planet) {
                 return Ok(planet);

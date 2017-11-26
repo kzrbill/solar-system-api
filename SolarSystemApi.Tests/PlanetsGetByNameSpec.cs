@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using SolarSystemApi.Controllers;
 
 namespace SolarSystemApi.Tests
@@ -32,10 +33,13 @@ namespace SolarSystemApi.Tests
         [TestClass]
         public class RequestForKnownPlanet
         {
+            private dynamic _planet; 
+
             [TestInitialize]
             public void BeforEach()
             {
-                GetPlanet("Earth");
+                GetPlanet("earth");
+                _planet = (_result as OkObjectResult).Value;
             }
 
             [TestMethod]
@@ -44,12 +48,10 @@ namespace SolarSystemApi.Tests
                 Assert.IsInstanceOfType(_result, typeof(OkObjectResult));
             }
 
-
-            // TODO respose.Value to JToken
-            [Ignore]
-            public void HasName()
+            [TestMethod]
+            public void HasEarthlyProperties()
             {
-                var respose = _result as OkObjectResult;
+                Assert.AreEqual("Earth", _planet.Name);
             }
         }
     }

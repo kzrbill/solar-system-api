@@ -7,4 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SolarSystemApi.Models\SolarSystemApi.Models.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
 </Project>

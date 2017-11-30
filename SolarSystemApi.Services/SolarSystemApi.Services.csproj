@@ -9,5 +9,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Planets.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Planets.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="LiteDB" Version="4.0.0" />
   </ItemGroup>
 </Project>

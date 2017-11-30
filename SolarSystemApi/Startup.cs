@@ -25,7 +25,9 @@ namespace SolarSystemApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IPlanetRepository, PlanetRepository>();
+            services.AddTransient<IServiceFactory, ServiceFactory>();
+
+            DBInitializer.Init(new ServiceFactory().CreateDB());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,20 +13,16 @@ namespace SolarSystemApi.Controllers
     public class PlanetsController : Controller
     {
         private readonly IPlanetRepository _planetRepo;
-        public PlanetsController(IPlanetRepository planetRepo)
+        public PlanetsController(IServiceFactory serviceFactory)
         {
-            _planetRepo = planetRepo;
+            _planetRepo = new PlanetRepository(serviceFactory.CreateDB());
         }
-
-        //public PlanetsController()
-        //{
-        //}
 
         // GET api/planets
         [HttpGet]
         public IEnumerable<IPlanet> Get()
         {
-            return new IPlanet[] { new Planet("somePlanet") };
+            return new IPlanet[] { };
         }
 
         // GET api/planets/earth

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using LiteDB;
 using SolarSystemApi.Models;
 
 namespace SolarSystemApi.Services
 {
-
-    // https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=Earth
-    // https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&props=claims&titles=Earth
-
     public interface IPlanetRepository
     {
         IPlanet GetByName(string name);
@@ -15,17 +12,33 @@ namespace SolarSystemApi.Services
 
     public class PlanetRepository : IPlanetRepository
     {
+        ILiteDatabase _db;
+        public PlanetRepository(ILiteDatabase db){
+            _db = db;
+        }
+
         public IPlanet GetByName(string name)
         {
-            // var planetsJson = new PlanetsJson("PlanetsJson");
+ 
+            var customers = _db.GetCollection<PlanetEntity>("planets");
+            var results = customers.Find(x => x.Name.ToLower() == name.ToLower());
+            // TODO: return the one planet
+ 
 
-            var planets = new Dictionary<string, IPlanet>()
-            {
-                {"earth", new Planet("Earth")}
-            };
+            var planetsJson = PlanetsJsonFile
+                .Load()
+                .Json();
 
-            name = name.ToLower();
-            return planets.GetValueOrDefault(name);
+            foreach(var planetToken in planetsJson["planets"]) {
+                var planetName = planetToken.Value<string>("name").ToLower();
+                if (planetName == name.ToLower()) {
+                    return Planet.WithToken(planetToken);
+                }
+            }
+
+            return null;
         }
     }
+
+
 }

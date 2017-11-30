@@ -1,5 +1,5 @@
 ﻿{
-  "description": "Solar System"
+  "description": "Solar System",
   "planets": [
     {
       "name": "Mercury",

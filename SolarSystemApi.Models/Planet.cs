@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace SolarSystemApi.Models
 {
@@ -9,12 +10,17 @@ namespace SolarSystemApi.Models
 
     public class Planet : IPlanet
     {
-        private readonly string _planetName;
-        public Planet(string planetName)
+        public static IPlanet WithToken(JToken planetJson)
         {
-            _planetName = planetName;
+            var planet = new Planet();
+            planet._planetName = (string)planetJson["name"];
+            return planet;
         }
 
+        private string _planetName;
         public string Name => _planetName;
+
+        private string _distanceFromSol;
+        public string DistanceFromSol => _distanceFromSol;
     }
 }

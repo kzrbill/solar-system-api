@@ -5,6 +5,17 @@ using SolarSystemApi.Services;
 
 namespace SolarSystemApi.Tests
 {
+    internal class TestsServiceFactory : IServiceFactory
+    {
+        public ILiteDatabase CreateDB()
+        {
+            return new TestDBProxy()
+                .WithPlanetEntity(new PlanetEntity() { Key = "zorg", Name = "Zorg" })
+                .WithPlanetEntity(new PlanetEntity() { Key = "zorg2", Name = "ZorgII" });
+        }
+    }
+
+
     public class PlanetsGetByNameSpec
     {
         private static IActionResult _result;
@@ -20,7 +31,7 @@ namespace SolarSystemApi.Tests
             [TestInitialize]
             public void BeforEach()
             {
-                GetPlanet("SomeElusiveAnomaly");
+                GetPlanet("SomeOtherElusiveAnomaly");
             }
 
             [TestMethod]
@@ -31,14 +42,14 @@ namespace SolarSystemApi.Tests
         }
 
         [TestClass]
-        public class RequestForKnownPlanet
+        public class RequestForPlanetInSolarSystem
         {
             private dynamic _planet; 
 
             [TestInitialize]
             public void BeforEach()
             {
-                GetPlanet("earth");
+                GetPlanet("zorg");
                 _planet = (_result as OkObjectResult).Value;
             }
 
@@ -51,17 +62,10 @@ namespace SolarSystemApi.Tests
             [TestMethod]
             public void ProvidesAllEarthlyData()
             {
-                Assert.AreEqual("Earth", _planet.Name);
-                Assert.AreEqual("123", _planet.DistanceFromSol);
+                Assert.AreEqual("Zorg", _planet.Name);
             }
         }
     }
 
-    internal class TestsServiceFactory : IServiceFactory
-    {
-        public ILiteDatabase CreateDB()
-        {
-            return new TestDBProxy();
-        }
-    }
+
 }

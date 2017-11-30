@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using LiteDB;
 using SolarSystemApi.Models;
+using System.Linq;
 
 namespace SolarSystemApi.Services
 {
     public interface IPlanetRepository
     {
-        IPlanet GetByName(string name);
+        IPlanet GetByKey(string key);
     }
 
     public class PlanetRepository : IPlanetRepository
@@ -17,26 +18,14 @@ namespace SolarSystemApi.Services
             _db = db;
         }
 
-        public IPlanet GetByName(string name)
+        public IPlanet GetByKey(string key)
         {
- 
             var customers = _db.GetCollection<PlanetEntity>("planets");
-            var results = customers.Find(x => x.Name.ToLower() == name.ToLower());
-            // TODO: return the one planet
- 
+            var results = customers.Find(x => x.Key.Contains(key.ToLower()));
+            if (!results.Any()) return null;
 
-            var planetsJson = PlanetsJsonFile
-                .Load()
-                .Json();
-
-            foreach(var planetToken in planetsJson["planets"]) {
-                var planetName = planetToken.Value<string>("name").ToLower();
-                if (planetName == name.ToLower()) {
-                    return Planet.WithToken(planetToken);
-                }
-            }
-
-            return null;
+            var entity = results.First();
+            return Planet.WithEntity(entity);
         }
     }
 

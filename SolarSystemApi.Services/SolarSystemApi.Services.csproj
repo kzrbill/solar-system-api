@@ -11,6 +11,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Entities\" />
     <Folder Include="Database\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Planets.json" />

@@ -1,16 +1,32 @@
-﻿using SolarSystemApi.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using LiteDB;
+using SolarSystemApi.Services;
 
 namespace SolarSystemApi.Tests
 {
     public class TestDBProxy : ILiteDatabase
     {
-        public void Dispose()
-        {
+        TestDBCollection<PlanetEntity> _planets;
+        public TestDBProxy() {
+            _planets = new TestDBCollection<PlanetEntity>();
         }
 
-        IDBCollectionProxy<EntityType> ILiteDatabase.GetCollection<EntityType>(string typeName)
+
+        internal TestDBProxy WithPlanetEntity(PlanetEntity planetEntity)
         {
-            throw new System.NotImplementedException();
+            _planets.Insert(planetEntity);
+            return this;
+        }
+
+        public IDBCollectionProxy<EntityType> GetCollection<EntityType>(string typeName)
+        {
+            return _planets as IDBCollectionProxy<EntityType>;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

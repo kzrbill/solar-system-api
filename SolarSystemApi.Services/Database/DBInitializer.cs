@@ -10,11 +10,12 @@
 
                 var planet = new PlanetEntity
                 {
+                    Key = "earth",
                     Name = "Earth"
                 };
 
                 planets.Insert(planet);
-                planets.EnsureIndex(x => x.Name);
+                planets.EnsureIndex(x => x.Key);
             }
         }
     }

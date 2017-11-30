@@ -22,14 +22,14 @@ namespace SolarSystemApi.Controllers
         [HttpGet]
         public IEnumerable<IPlanet> Get()
         {
-            return new IPlanet[] { };
+            return new Planet[] { };
         }
 
         // GET api/planets/earth
         [HttpGet("{planetName}")]
         public IActionResult Get(string planetName)
         {
-            IPlanet planet = _planetRepo.GetByName(planetName);
+            IPlanet planet = _planetRepo.GetByKey(planetName);
             if (null != planet) {
                 return Ok(planet);
             }

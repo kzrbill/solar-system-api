@@ -9,7 +9,8 @@ namespace SolarSystemApi.Services
     {
         BsonValue Insert(EntityType document);
         bool EnsureIndex<K>(Expression<Func<EntityType, K>> property, bool unique = false);
-        IEnumerable<EntityType> Find(Expression<Func<EntityType, bool>> predicate, int skip = 0, int limit = 2147483647);
+        IEnumerable<EntityType> Find(Expression<Func<EntityType, bool>> predicate, int skip = 0, int limit = int.MaxValue);
+        IEnumerable<EntityType> Find(Query query, int skip = 0, int limit = int.MaxValue);
     }
 
     public class DBCollectionProxy<EntityType> : IDBCollectionProxy<EntityType>
@@ -28,6 +29,11 @@ namespace SolarSystemApi.Services
         public IEnumerable<EntityType> Find(Expression<Func<EntityType, bool>> predicate, int skip = 0, int limit = int.MaxValue)
         {
             return _liteCollection.Find(predicate, skip, limit);
+        }
+
+        public IEnumerable<EntityType> Find(Query query, int skip = 0, int limit = int.MaxValue)
+        {
+            return _liteCollection.Find(query, skip, limit);
         }
 
         public BsonValue Insert(EntityType document)

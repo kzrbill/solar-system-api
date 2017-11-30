@@ -24,6 +24,11 @@ namespace SolarSystemApi.Tests
             return _docs.FindAll(e => predicate(e));
         }
 
+        public IEnumerable<EntityType> Find(Query query, int skip = 0, int limit = int.MaxValue)
+        {
+            return _docs;
+        }
+
         public BsonValue Insert(EntityType document)
         {
             _docs.Add(document);

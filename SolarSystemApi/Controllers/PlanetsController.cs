@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SolarSystemApi.Models;
 using SolarSystemApi.Services;
 
 namespace SolarSystemApi.Controllers
@@ -12,31 +11,30 @@ namespace SolarSystemApi.Controllers
     [Route("api/[controller]")]
     public class PlanetsController : Controller
     {
-        private readonly IServiceFactory _serviceFactory;
+        private readonly IPlanetRepository _repo;
         public PlanetsController(IServiceFactory serviceFactory)
         {
-            _serviceFactory = serviceFactory;
+            _repo = new PlanetRepository(serviceFactory.CreateDB());
         }
 
         // GET api/planets
         [HttpGet]
-        public IEnumerable<IPlanet> Get()
+        public IActionResult Get()
         {
-            return new Planet[] { };
+            IEnumerable<IPlanet> planets = _repo.GetAll();
+            return Ok(new { planets });
         }
 
         // GET api/planets/earth
         [HttpGet("{planetName}")]
         public IActionResult Get(string planetName)
         {
-            var repo = new PlanetRepository(_serviceFactory.CreateDB());
-
-            IPlanet planet = repo.GetByKey(planetName);
+            IPlanet planet = _repo.GetByKey(planetName);
             if (null != planet) {
                 return Ok(planet);
             }
 
-            return NotFound(planetName);
+            return NotFound($"Planet {planetName} not found in Solar System");
         }
     }
 

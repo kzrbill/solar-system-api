@@ -1,8 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using SolarSystemApi.Services;
 
-namespace SolarSystemApi.Models
+namespace SolarSystemApi.Services
 {
     public interface IPlanet
     {

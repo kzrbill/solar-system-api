@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LiteDB;
-using SolarSystemApi.Models;
+using SolarSystemApi.Services;
 using System.Linq;
 
 namespace SolarSystemApi.Services
@@ -9,6 +9,7 @@ namespace SolarSystemApi.Services
     public interface IPlanetRepository
     {
         IPlanet GetByKey(string key);
+        IEnumerable<IPlanet> GetAll();
     }
 
     public class PlanetRepository : IPlanetRepository
@@ -16,6 +17,14 @@ namespace SolarSystemApi.Services
         ILiteDatabase _db;
         public PlanetRepository(ILiteDatabase db){
             _db = db;
+        }
+
+        public IEnumerable<IPlanet> GetAll()
+        {
+            var planets = _db.GetCollection<PlanetEntity>("planets");
+            var results = planets.Find(Query.All(Query.Descending));
+
+            return results.Select((e) => Planet.WithEntity(e));
         }
 
         public IPlanet GetByKey(string key)

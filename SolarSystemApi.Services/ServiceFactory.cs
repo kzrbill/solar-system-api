@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LiteDB;
-using SolarSystemApi.Models;
+using SolarSystemApi.Services;
 
 namespace SolarSystemApi.Services
 {

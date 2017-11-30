@@ -12,10 +12,9 @@ namespace SolarSystemApi.Services
 
     public class ServiceFactory : IServiceFactory
     {
+        private static ILiteDatabase _db;
         public ILiteDatabase CreateDB() {
-            return new DBProxy(@"Filename=SolarSystem.db;Mode=Exclusive");
+            return _db ?? (_db = new DBProxy(@"Filename=SolarSystem.db;Mode=Exclusive")); 
         }
     }
-
-
 }

@@ -12,10 +12,10 @@ namespace SolarSystemApi.Controllers
     [Route("api/[controller]")]
     public class PlanetsController : Controller
     {
-        private readonly IPlanetRepository _planetRepo;
+        private readonly IServiceFactory _serviceFactory;
         public PlanetsController(IServiceFactory serviceFactory)
         {
-            _planetRepo = new PlanetRepository(serviceFactory.CreateDB());
+            _serviceFactory = serviceFactory;
         }
 
         // GET api/planets
@@ -29,7 +29,9 @@ namespace SolarSystemApi.Controllers
         [HttpGet("{planetName}")]
         public IActionResult Get(string planetName)
         {
-            IPlanet planet = _planetRepo.GetByKey(planetName);
+            var repo = new PlanetRepository(_serviceFactory.CreateDB());
+
+            IPlanet planet = repo.GetByKey(planetName);
             if (null != planet) {
                 return Ok(planet);
             }

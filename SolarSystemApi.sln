@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarSystemApi.Tests", "Sol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarSystemApi.Services", "SolarSystemApi.Services\SolarSystemApi.Services.csproj", "{9CD85FC4-48D8-4486-8454-249C4ABDC055}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarSystemApi.Models", "SolarSystemApi.Models\SolarSystemApi.Models.csproj", "{5B6348F7-33F9-4F01-AEA0-908AD2694267}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +25,5 @@ Global
 		{9CD85FC4-48D8-4486-8454-249C4ABDC055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CD85FC4-48D8-4486-8454-249C4ABDC055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CD85FC4-48D8-4486-8454-249C4ABDC055}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B6348F7-33F9-4F01-AEA0-908AD2694267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B6348F7-33F9-4F01-AEA0-908AD2694267}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B6348F7-33F9-4F01-AEA0-908AD2694267}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B6348F7-33F9-4F01-AEA0-908AD2694267}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

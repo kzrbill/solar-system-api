@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SolarSystemApi.Models\SolarSystemApi.Models.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Entities\" />
     <Folder Include="Database\" />

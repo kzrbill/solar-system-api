@@ -21,5 +21,6 @@
     <Folder Include="Proxies\" />
     <Folder Include="Factories\" />
     <Folder Include="Specs\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
 </Project>

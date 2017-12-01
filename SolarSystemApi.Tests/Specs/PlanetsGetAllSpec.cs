@@ -37,7 +37,7 @@ namespace SolarSystemApi.Tests
             }
 
             [TestMethod]
-            public void ProvidesAllEarthlyData()
+            public void ProvidesCorrectNumberOfPlanets()
             {
                 Assert.AreEqual(2, _planets.Count);
             }

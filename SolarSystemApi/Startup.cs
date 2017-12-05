@@ -49,7 +49,7 @@ namespace SolarSystemApi
             }
 
             // TODO: Allow restricted headers
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000")
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3000", "http://solarsystemui.azurewebsites.net")
                         .AllowAnyHeader());
 
             app.UseSwagger();

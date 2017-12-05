@@ -8,7 +8,7 @@ namespace SolarSystemApi.Services
 {
     public interface IPlanetRepository
     {
-        IPlanet GetByKey(string key);
+        IPlanet GetByName(string key);
         IEnumerable<IPlanet> GetAll();
     }
 
@@ -22,15 +22,15 @@ namespace SolarSystemApi.Services
         public IEnumerable<IPlanet> GetAll()
         {
             var planets = _db.GetCollection<PlanetEntity>("planets");
-            var results = planets.Find(Query.All(Query.Descending));
+            var results = planets.Find(Query.All(Query.Descending)).OrderBy(p => p.MinDistanceFromSolKm);
 
             return results.Select((e) => Planet.WithEntity(e));
         }
 
-        public IPlanet GetByKey(string key)
+        public IPlanet GetByName(string name)
         {
             var customers = _db.GetCollection<PlanetEntity>("planets");
-            var results = customers.Find(x => x.Key.Contains(key.ToLower()));
+            var results = customers.Find(x => x.Name.ToLower().Equals(name.ToLower()));
             if (!results.Any()) return null;
 
             var entity = results.First();

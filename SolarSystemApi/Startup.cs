@@ -48,6 +48,10 @@ namespace SolarSystemApi
                 app.UseDeveloperExceptionPage();
             }
 
+            // TODO: Allow restricted headers
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader());
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

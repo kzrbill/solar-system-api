@@ -29,7 +29,7 @@ namespace SolarSystemApi.Controllers
         [HttpGet("{planetName}")]
         public IActionResult Get(string planetName)
         {
-            IPlanet planet = _repo.GetByKey(planetName);
+            IPlanet planet = _repo.GetByName(planetName);
             if (null != planet) {
                 return Ok(planet);
             }

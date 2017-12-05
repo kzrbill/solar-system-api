@@ -13,7 +13,6 @@ namespace SolarSystemApi.Tests
             _planets = new TestDBCollection<PlanetEntity>();
         }
 
-
         internal TestDBProxy WithPlanetEntity(PlanetEntity planetEntity)
         {
             _planets.Insert(planetEntity);

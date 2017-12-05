@@ -22,15 +22,16 @@ namespace SolarSystemApi.Services
         public IEnumerable<IPlanet> GetAll()
         {
             var planets = _db.GetCollection<PlanetEntity>("planets");
-            var results = planets.Find(Query.All(Query.Descending)).OrderBy(p => p.MinDistanceFromSolKm);
+            var results = planets.Find(Query.All(Query.Ascending)).OrderBy(p => p.MinDistanceFromSolKm);
 
             return results.Select((e) => Planet.WithEntity(e));
         }
 
         public IPlanet GetByName(string name)
         {
-            var customers = _db.GetCollection<PlanetEntity>("planets");
-            var results = customers.Find(x => x.Name.ToLower().Equals(name.ToLower()));
+            var planets = _db.GetCollection<PlanetEntity>("planets");
+            var results = planets.Find(p => (bool)(p.Name.ToLower() == name.ToLower()));
+
             if (!results.Any()) return null;
 
             var entity = results.First();

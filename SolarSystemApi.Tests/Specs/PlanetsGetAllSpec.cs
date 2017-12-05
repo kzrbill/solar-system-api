@@ -37,9 +37,16 @@ namespace SolarSystemApi.Tests
             }
 
             [TestMethod]
-            public void ProvidesCorrectNumberOfPlanets()
+            public void ProvidesCorrectNumberOfObjects()
             {
                 Assert.AreEqual(2, _planets.Count);
+            }
+
+            [TestMethod]
+            public void ObjectsInResponseHaveBasicPlanetData()
+            {
+                Assert.AreEqual("Zorg", _planets[0]["Name"]);
+                Assert.AreEqual("ZorgII", _planets[1]["Name"]);
             }
         }
     }

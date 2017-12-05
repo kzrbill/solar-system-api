@@ -33,12 +33,12 @@ namespace SolarSystemApi.Services
             planet
             .AddStat(new PlanetStat()
             {
-                Name = "DistanceFromSol",
+                Name = "Distance from Sol",
                 Value = $"{entity.MinDistanceFromSolKm} / {entity.MaxDistanceFromSolKm} km"
             })
             .AddStat(new PlanetStat()
             {
-                Name = "OrbitalDeviation",
+                Name = "Orbital deviation",
                 Value = $"{(entity.MaxDistanceFromSolKm - entity.MinDistanceFromSolKm)} km"
             })
             .AddStat(new PlanetStat()
@@ -53,7 +53,7 @@ namespace SolarSystemApi.Services
             })
             .AddStat(new PlanetStat()
             {
-                Name = "Surface Temperature (mean)",
+                Name = "Surface temperature (mean)",
                 Value = $"{entity.TemperatureMeanKelvin} K"
             })
             .AddStat(new PlanetStat()
